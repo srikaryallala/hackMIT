@@ -61,21 +61,24 @@ export default class Chat extends Component {
     let x = this.state.messages;
     let y = x.push(messages[0]);
     this.setState({messages: x});
+
+    // set the remote firebase to update messages accordingly
+    db.collection("messages").doc(this.state.location).set({
+      location: this.state.location,
+      message: messages[0],
+    }).then(() => {
+      console.log("successfully added a new message!")
+    })
   }
 
   render() {
     if(this.state.isLoaded) {
       return (
         <View style={styles.container}>
-        <TouchableOpacity
-        style={styles.logoutButton}
-        onPress={() => this.handleLogOut()}>
-        <Text style={[styles.logoutButtonText, styles.text]}>Log Out</Text>
-        </TouchableOpacity>
         <GiftedChat
           messages = { this.state.messages }
           onSend = {messages => this.oSend(messages)}
-          user={{_id: this.state.uid}}
+          user={{_id: this.state.user}}
           renderUsernameOnMessage = {true}
           inverted = {false}
         />
