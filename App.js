@@ -1,7 +1,19 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { Component } from 'react';
+import { createStore, applyMiddleware } from 'redux'
+import thunkMiddleware from 'redux-thunk'
+import reducer from './reducers'
+
+import { Provider } from 'react-redux'
+import { NavigationContainer } from '@react-navigation/native';
+import AuthStackNavigator from './navigation/AuthStackNavigator'
+
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import Firebase from './config/Firebase';
 import Chat from './components/Chat';
+
+const middleware = applyMiddleware(thunkMiddleware)
+const store = createStore(reducer, middleware)
 
 export default class App extends Component {
   constructor() {
@@ -49,11 +61,15 @@ export default class App extends Component {
 
   render() {
     return (
-      <View style = { styles.container } >
-        <TouchableOpacity onPress={this.findCoordinates}>
-          <Text> Location: { this.state.location } </Text>
-        </TouchableOpacity>
-      </View>
+      <Provider store={store}>
+          <NavigationContainer>
+            { this.state.user ? (
+              <BottomTabNavigator/>
+            ) : (
+              <AuthStackNavigator/>
+            )}
+          </NavigationContainer>
+        </Provider>
     );
 
   }
