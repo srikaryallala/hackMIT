@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { GiftedChat } from 'react-native-gifted-chat';
-import Firebase from '../config/Firebase';
+import Firebase, { db } from '../config/Firebase';
+import firebase from '../config/Firebase';
 
 export default class Chat extends Component {
   constructor(props) {
     super(props);
     this.state = {
       messages: [{
-        _id: 1,
-        text: 'Hello developer',
+        _id: 0,
+        text: 'Hello',
         createdAt: new Date(),
         user: {
           _id: 2,
@@ -16,11 +17,13 @@ export default class Chat extends Component {
         },
       },],
       user: null,
-      isLoaded: false
+      isLoaded: false,
+      location: null,
     }
   }
 
   async componentDidMount() {
+    this.findCoordinates();
     let user = await Firebase.auth().currentUser;
       if(user) {
         this.setState({
@@ -30,9 +33,20 @@ export default class Chat extends Component {
       }
   }
 
-   oSend(messages) {
+  findCoordinates = async () => {
+    await navigator.geolocation.getCurrentPosition(
+      position => {
+        const location = [position.coords.latitude.toFixed(0),position.coords.longitude.toFixed(0)];
+        this.setState({location});
+      },
+      error => console.log(error.message),
+      { enableHighAccuracy: false, timeout: 0, maximumAge: 10000 }
+    );
+  };
+
+  oSend(messages) {
     let x = this.state.messages;
-    let y = x.unshift(messages[0]);
+    let y = x.push(messages[0]);
     this.setState({messages: x});
   }
 
@@ -44,6 +58,7 @@ export default class Chat extends Component {
           onSend = {messages => this.oSend(messages)}
           user={{_id: this.state.uid}}
           renderUsernameOnMessage = {true}
+          inverted = {false}
         />
       );
     }
@@ -53,5 +68,4 @@ export default class Chat extends Component {
       );
     }
   }
-
 }
