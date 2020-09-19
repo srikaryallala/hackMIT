@@ -5,10 +5,35 @@ import Chat from './components/Chat';
 import firebase from './config/Firebase';
 
 export default class App extends Component {
-  state = {
-    location: null,
-    chatRoom: null,
-  };
+  constructor() {
+    super();
+    this.state = {
+      user: null,
+      isLoading: true,
+      fontsLoading: true,
+      location: null,
+      chatRoom: null,
+    };
+  }
+
+  async componentDidMount() {
+    await Firebase.auth().onAuthStateChanged(async user => {
+      if(user) {
+        console.log(user);
+        this.setState({
+          user: user.uid,
+          isLoading: false,
+        });
+        //await console.log(new Date().getTime() - this.state.timer);
+      }
+      else {
+        this.setState({
+          user: null,
+          isLoading: false,
+        })
+      }
+    });
+  }
 
   findChatRoom = () => {
     database = firebase.database();
@@ -34,11 +59,13 @@ export default class App extends Component {
     );
   };
 
+
+
   render() {
-    return ( 
+    return (
       <View style = { styles.container } >
         <TouchableOpacity onPress={this.findCoordinates}>
-          <Text> Location: { this.state.location } </Text> 
+          <Text> Location: { this.state.location } </Text>
         </TouchableOpacity>
       </View>
     );
