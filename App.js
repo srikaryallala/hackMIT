@@ -1,16 +1,6 @@
-import {
-  StatusBar
-} from 'expo-status-bar';
-//import React from 'react';
-import React, {
-  Component
-} from 'react';
-import {
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View
-} from 'react-native';
+import { StatusBar } from 'expo-status-bar';
+import React, { Component } from 'react';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Chat from './components/Chat';
 
 export default class App extends Component {
