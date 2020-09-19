@@ -27,7 +27,22 @@ export default class App extends Component {
   }
 
   async componentDidMount() {
-
+    await Firebase.auth().onAuthStateChanged(async user => {
+      if(user) {
+        console.log(user);
+        this.setState({
+          user: user.uid,
+          isLoading: false,
+        });
+        //await console.log(new Date().getTime() - this.state.timer);
+      }
+      else {
+        this.setState({
+          user: null,
+          isLoading: false,
+        })
+      }
+    });
   }
 
   findCoordinates = async () => {
