@@ -1,42 +1,43 @@
 import React, { Component } from 'react';
 import { GiftedChat } from 'react-native-gifted-chat';
-
+import Firebase from '../config/Firebase';
 
 export default class Chat extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      messages: [{
-        _id: 1,
-        text: 'Hello developer',
-        createdAt: new Date(),
-        user: {
-          _id: 1,
-          name: 'React Native',
-          avatar: 'https://placeimg.com/140/140/any',
-        },
-      }],
+      messages: ["hi"],
+      user: null,
+      isLoaded: false
     }
   }
 
-  function sendMessage(message) {
-    this.state.messages.push(message);
-    console.log(this.state.messages);
-    return true;
-  }
-
-  function myFunction(p1, p2) {
-    return p1 * p2;   // The function returns the product of p1 and p2
+  async componentDidMount() {
+    let user = await Firebase.auth().currentUser;
+      if(user) {
+        this.setState({
+          user: user.uid,
+          isLoaded: true,
+        })
+      }
   }
 
   render() {
-    return ( 
-      <GiftedChat 
-        messages = { this.state.messages }
-        onSend={message => sendMessage(message)}
-        user={{_id: 1}}
-      />
-    );
+    if(this.state.isLoaded) {
+      console.log(this.state.user)
+      return (
+        <GiftedChat
+          messages = { this.state.messages }
+
+          user={{_id: 1}}
+        />
+      );
+    }
+    else {
+      return(
+        null
+      );
+    }
   }
 
 }
