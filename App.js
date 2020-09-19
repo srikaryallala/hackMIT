@@ -20,8 +20,7 @@ export default class App extends Component {
   findCoordinates = () => {
     navigator.geolocation.getCurrentPosition(
       position => {
-        const location = JSON.stringify(position);
-
+        const location = [JSON.stringify(position.coords.latitude),JSON.stringify(position.coords.longitude)] ;
         this.setState({location});
       },
       error => Alert.alert(error.message),
