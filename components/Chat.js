@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { GiftedChat } from 'react-native-gifted-chat';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+
 import { ObjectUnsubscribedError } from 'rxjs';
 import Firebase, { db } from '../config/Firebase';
 import firebase from '../config/Firebase';
@@ -69,6 +71,12 @@ export default class Chat extends Component {
   render() {
     if(this.state.isLoaded) {
       return (
+        <View style={styles.container}>
+        <TouchableOpacity
+        style={styles.logoutButton}
+        onPress={() => this.handleLogOut()}>
+        <Text style={[styles.logoutButtonText, styles.text]}>Log Out</Text>
+        </TouchableOpacity>
         <GiftedChat
           messages = { this.state.messages }
           onSend = {messages => this.oSend(messages)}
@@ -76,6 +84,7 @@ export default class Chat extends Component {
           renderUsernameOnMessage = {true}
           inverted = {false}
         />
+        </View>
       );
     }
     else {
@@ -83,5 +92,38 @@ export default class Chat extends Component {
         null
       );
     }
+  }
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    borderWidth: 1,
+    width: '100%',
+    height: '100%',
+    backgroundColor: '#fff',
+    // alignItems: 'center',
+    justifyContent: 'center',
+  },
+  // logout button for debugging purposes
+  logoutButton: {
+    position: 'relative',
+    fontSize: 20,
+    borderWidth: 1,
+    borderColor: 'black',
+    top: '10%',
+  },
+  logoutButtonText: {
+    fontSize: 20,
+  },
+});
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ getUser, logout }, dispatch)
+}
+
+const mapStateToProps = state => {
+  return {
+    user: state.user
   }
 }
