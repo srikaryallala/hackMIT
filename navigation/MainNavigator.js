@@ -2,6 +2,7 @@ import LoginScreen from '../screens/LoginScreen'
 import SignupScreen from '../screens/SignupScreen'
 
 import LocationInfo from '../screens/LocationInfo'
+import Chat from '../components/Chat'
 
 import { Ionicons } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
@@ -17,7 +18,7 @@ const MainNavigator = createStackNavigator();
 export default function MainStackNavigator() {
   return (
     <MainNavigator.Navigator
-      initialRouteName="Location"
+      initialRouteName="Chat"
       screenOptions={{
         headerShown: false
       }}
@@ -25,6 +26,11 @@ export default function MainStackNavigator() {
       <MainNavigator.Screen
         name="Location"
         component = {LocationInfo}
+      />
+
+      <MainNavigator.Screen
+        name="Chat"
+        component = {Chat}
       />
 
     </MainNavigator.Navigator>
