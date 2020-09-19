@@ -7,10 +7,12 @@ import reducer from './reducers'
 import { Provider } from 'react-redux'
 import { NavigationContainer } from '@react-navigation/native';
 import AuthStackNavigator from './navigation/AuthStackNavigator'
+import MainNavigator from './navigation/MainNavigator'
 
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Firebase from './config/Firebase';
 import Chat from './components/Chat';
+import firebase from './config/Firebase';
 
 const middleware = applyMiddleware(thunkMiddleware)
 const store = createStore(reducer, middleware)
@@ -46,13 +48,26 @@ export default class App extends Component {
     });
   }
 
+  findChatRoom = () => {
+    database = firebase.database();
+    //console.log('completed')
+    var chatRoomRef = database.ref('/');
+    //console.log('completed')
+    chatRoomRef.once('value').then(function(snapshot) {
+      console.log(snapshot.val())
+    })
+    //console.log(database);
+  }
+
   findCoordinates = async () => {
     await navigator.geolocation.getCurrentPosition(
       position => {
         const location = [position.coords.latitude.toFixed(0),position.coords.longitude.toFixed(0)];
         this.setState({location});
+        //console.log(this.state.location);
+        this.findChatRoom();
       },
-      error => Alert.alert(error.message),
+      error => console.log(error.message),
       { enableHighAccuracy: false, timeout: 0, maximumAge: 10000 }
     );
   };
@@ -64,7 +79,7 @@ export default class App extends Component {
       <Provider store={store}>
           <NavigationContainer>
             { this.state.user ? (
-              <BottomTabNavigator/>
+              <MainNavigator/>
             ) : (
               <AuthStackNavigator/>
             )}
