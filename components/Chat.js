@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { GiftedChat } from 'react-native-gifted-chat';
+import { ObjectUnsubscribedError } from 'rxjs';
 import Firebase, { db } from '../config/Firebase';
 import firebase from '../config/Firebase';
 
@@ -23,7 +24,7 @@ export default class Chat extends Component {
   }
 
   async componentDidMount() {
-    this.findCoordinates();
+    await this.findCoordinates();
     let user = await Firebase.auth().currentUser;
       if(user) {
         this.setState({
@@ -33,11 +34,21 @@ export default class Chat extends Component {
       }
   }
 
+  findMessages = async () => {
+    var unsubscribe = db.collection('messages').doc(this.state.location.toString())
+    .onSnapshot(function(doc) {
+      console.log(doc.data());
+    });
+    //unsubscribe();
+  }
+
   findCoordinates = async () => {
     await navigator.geolocation.getCurrentPosition(
       position => {
-        const location = [position.coords.latitude.toFixed(0),position.coords.longitude.toFixed(0)];
+        var location = [position.coords.latitude.toFixed(0),position.coords.longitude.toFixed(0)];
+        location = location.toString();
         this.setState({location});
+        this.findMessages();
       },
       error => console.log(error.message),
       { enableHighAccuracy: false, timeout: 0, maximumAge: 10000 }
