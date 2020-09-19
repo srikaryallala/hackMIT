@@ -5,6 +5,7 @@ import {
 import React, {
   Component
 } from 'react';
+
 import {
   StyleSheet,
   Text,
@@ -12,10 +13,22 @@ import {
   View
 } from 'react-native';
 
+import Firebase from './config/Firebase';
+
 export default class App extends Component {
-  state = {
-    location: null
-  };
+  constructor() {
+    super();
+    this.state = {
+      user: null,
+      isLoading: true,
+      fontsLoading: true,
+      location: null,
+    };
+  }
+
+  async componentDidMount() {
+
+  }
 
   findCoordinates = () => {
     navigator.geolocation.getCurrentPosition(
@@ -30,14 +43,13 @@ export default class App extends Component {
   };
 
   render() {
-    return ( 
+    return (
       <View style = { styles.container } >
         <TouchableOpacity onPress={this.findCoordinates}>
-          <Text> Location: { this.state.location } </Text> 
+          <Text> Location: { this.state.location } </Text>
         </TouchableOpacity>
       </View>
     );
-
   }
 
 }

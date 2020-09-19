@@ -10,14 +10,17 @@
   "dependencies": {
     "expo": "^38.0.10",
     "expo-status-bar": "^1.0.2",
+    "firebase": "^7.21.0",
     "react": "~16.11.0",
     "react-dom": "~16.11.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-38.0.2.tar.gz",
+    "react-native-dotenv": "^0.2.0",
     "react-native-web": "~0.11.7"
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",
-    "babel-preset-expo": "~8.1.0"
+    "babel-preset-expo": "~8.1.0",
+    "metro-react-native-babel-preset": "^0.63.0"
   },
   "private": true
 }
