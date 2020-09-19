@@ -5,22 +5,22 @@ import Chat from './components/Chat';
 
 export default class App extends Component {
   state = {
-    location: null
+    location: null,
+    chatRoom: null,
   };
 
   findCoordinates = async () => {
-    //console.log("started");
     await navigator.geolocation.getCurrentPosition(
       position => {
-        const location = [JSON.stringify(position.coords.latitude),JSON.stringify(position.coords.longitude)];
-        //console.log(location[1])
+        const location = [position.coords.latitude.toFixed(0),position.coords.longitude.toFixed(0)];
         this.setState({location});
       },
       error => Alert.alert(error.message),
       { enableHighAccuracy: false, timeout: 0, maximumAge: 10000 }
     );
-    //console.log("loaded");
   };
+
+  
 
   render() {
     return ( 
