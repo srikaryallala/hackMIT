@@ -26,7 +26,7 @@ export default class App extends Component {
         this.setState({location});
       },
       error => Alert.alert(error.message),
-      { enableHighAccuracy: false, timeout: 0, maximumAge: 0 }
+      { enableHighAccuracy: false, timeout: 0, maximumAge: 10000 }
     );
     console.log("loaded");
   };
