@@ -11,6 +11,7 @@ import {
   TouchableOpacity,
   View
 } from 'react-native';
+import firebase from '../config/Firebase';
 
 
 export default class LocationInfo extends Component {
@@ -20,6 +21,14 @@ export default class LocationInfo extends Component {
       location: null,
     }
   }
+
+  findChatRoom = () => {
+    database = firebase.database();
+    var chatRoomRef = database.ref('/');
+    chatRoomRef.once('value').then(function(snapshot) {
+      console.log(snapshot.val());
+    });
+  };
 
   findCoordinates = async () => {
     await navigator.geolocation.getCurrentPosition(

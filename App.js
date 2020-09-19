@@ -32,12 +32,10 @@ export default class App extends Component {
   async componentDidMount() {
     await Firebase.auth().onAuthStateChanged(async user => {
       if(user) {
-        console.log(user);
         this.setState({
           user: user.uid,
           isLoading: false,
         });
-        //await console.log(new Date().getTime() - this.state.timer);
       }
       else {
         this.setState({
@@ -47,32 +45,6 @@ export default class App extends Component {
       }
     });
   }
-
-  findChatRoom = () => {
-    database = firebase.database();
-    //console.log('completed')
-    var chatRoomRef = database.ref('/');
-    //console.log('completed')
-    chatRoomRef.once('value').then(function(snapshot) {
-      console.log(snapshot.val())
-    })
-    //console.log(database);
-  }
-
-  findCoordinates = async () => {
-    await navigator.geolocation.getCurrentPosition(
-      position => {
-        const location = [position.coords.latitude.toFixed(0),position.coords.longitude.toFixed(0)];
-        this.setState({location});
-        //console.log(this.state.location);
-        this.findChatRoom();
-      },
-      error => console.log(error.message),
-      { enableHighAccuracy: false, timeout: 0, maximumAge: 10000 }
-    );
-  };
-
-
 
   render() {
     return (
