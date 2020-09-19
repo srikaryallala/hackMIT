@@ -37,10 +37,15 @@ export default class Chat extends Component {
   }
 
   findMessages = async () => {
-    var unsubscribe = db.collection('messages').doc(this.state.location.toString())
-    .onSnapshot(function(doc) {
+    var docRef = db.collection('messages').doc(this.state.location.toString())
+    const doc = await docRef.get();
+    if(doc.exists) {
       console.log(doc.data());
-    });
+    }
+    
+    // .onSnapshot(function(doc) {
+    //   console.log(doc.data());
+    // });
     //unsubscribe();
   }
 
