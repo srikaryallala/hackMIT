@@ -6,8 +6,6 @@ import {
   PROJECT_ID,
   MESSAGE_SENDER_ID,
   STORAGE_BUCKET,
-  APP_ID,
-  MEASUREMENT_ID,
 } from 'react-native-dotenv'
 
 class FirebaseSDK {
