@@ -30,28 +30,30 @@ export default class App extends Component {
 
   }
 
-  findCoordinates = () => {
-    navigator.geolocation.getCurrentPosition(
+  findCoordinates = async () => {
+    console.log("started");
+    await navigator.geolocation.getCurrentPosition(
       position => {
-        const location = JSON.stringify(position);
-
+        const location = [JSON.stringify(position.coords.latitude),JSON.stringify(position.coords.longitude)] ;
+        // console.log(location[1])
+        console.log(location)
         this.setState({location});
       },
       error => Alert.alert(error.message),
-      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+      { enableHighAccuracy: false, timeout: 0, maximumAge: 10000 }
     );
+    console.log("loaded");
   };
 
   render() {
     return (
-      <View style = { styles.container } >
-        <TouchableOpacity onPress={this.findCoordinates}>
-          <Text> Location: { this.state.location } </Text>
-        </TouchableOpacity>
+      <View style = { styles.container }>
+      <TouchableOpacity onPress={this.findCoordinates}>
+      <Text> Location: { this.state.location } </Text>
+      </TouchableOpacity>
       </View>
     );
   }
-
 }
 
 const styles = StyleSheet.create({
