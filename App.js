@@ -11,6 +11,7 @@ import {
   TouchableOpacity,
   View
 } from 'react-native';
+import Chat from './components/Chat';
 
 export default class App extends Component {
   state = {
@@ -18,17 +19,17 @@ export default class App extends Component {
   };
 
   findCoordinates = async () => {
-    console.log("started");
+    //console.log("started");
     await navigator.geolocation.getCurrentPosition(
       position => {
-        const location = [JSON.stringify(position.coords.latitude),JSON.stringify(position.coords.longitude)] ;
-        console.log(location[1])
+        const location = [JSON.stringify(position.coords.latitude),JSON.stringify(position.coords.longitude)];
+        //console.log(location[1])
         this.setState({location});
       },
       error => Alert.alert(error.message),
       { enableHighAccuracy: false, timeout: 0, maximumAge: 10000 }
     );
-    console.log("loaded");
+    //console.log("loaded");
   };
 
   render() {
