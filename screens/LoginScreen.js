@@ -13,12 +13,6 @@ import Firebase from '../config/Firebase'
 import * as Font from 'expo-font';
 import { useFonts } from 'expo-font';
 
-let customFonts = {
-  'Barlow-Regular': require('../assets/fonts/Barlow-Regular.ttf'),
-  'Barlow-Medium': require('../assets/fonts/Barlow-Medium.ttf'),
-};
-
-
 class LoginScreen extends Component {
   static navigationOptions = {
     title: 'Login'
@@ -38,42 +32,28 @@ class LoginScreen extends Component {
       style={styles.container}>
       <Image
         style={styles.tinyLogo}
-        source={require('../assets/images/backarrow.svg')}
+        source={require('../assets/images/ontoologo.png')}
       />
-        <Text style={styles.title}>Login</Text>
         <TextInput
         value={this.props.user.email}
         onChangeText={email => this.props.updateEmail(email)}
         style={[styles.textBar, styles.username]}
-        placeholder="email"
+        placeholder='Username'
         autoCapitalize='none'
         />
         <TextInput
         value={this.props.user.password}
         onChangeText={password => this.props.updatePassword(password)}
         style={[styles.textBar, styles.password]}
-        placeholder="password"
+        placeholder="Password"
         secureTextEntry={true}
         />
-        <LinearGradient
-          // Button Linear Gradient
-          colors={['#94DFBC', '#48DBC9']}
-          style={styles.button}>
-            <TouchableOpacity
-            title="Login"
-            onPress={this.props.login}
-            >
-              <Text style={styles.buttonText}>Sign in</Text>
-            </TouchableOpacity>
-        </LinearGradient>
-
         <TouchableOpacity
-        title="Signup"
-        style={styles.bottomButton}
-        onPress={() => this.props.navigation.navigate('Signup')}
-        buttonStyle={styles.button}
+        title="LOG IN"
+        style={styles.button}
+        onPress={() => this.props.navigation.navigate('Login')}
         >
-          <Text style={[styles.buttonText, styles.bottomButtonText]}>Don't have an account yet? Sign up :)</Text>
+          <Text style={styles.buttonText}>LOG IN</Text>
         </TouchableOpacity>
       </View>
     );
@@ -86,38 +66,30 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'white',
+    backgroundColor: '#F9F9F9',
     width: '100%',
     height: '100%',
   },
   tinyLogo: {
     position: 'relative',
-    width: '10%',
-    height: '7%',
-    top: '-20%',
-    color: '#212121'
+    width: '50%',
+    height: '10%',
+    top: '-10%'
   },
-  title: {
+  back: {
     position: 'relative',
-    fontSize: 35,
-    lineHeight: 41,
-    fontWeight: 'bold',
-    color: '#C4C4C4',
-    width: '100%',
-    height: '5%',
-    left: '15%',
-    paddingBottom: 60,
+    width: '20%'
   },
   textBar: {
+    fontFamily: 'Avenir',
     position: 'relative',
     justifyContent: 'center',
-    width: '75%',
+    width: '70%',
     height: '5%',
-    backgroundColor: '#FFFFFF',
-    borderColor: '#C4C4C4',
+    backgroundColor: '#F9F9F9',
     borderWidth: 1,
-    borderRadius: 50,
-    color: 'black',
+    borderColor: '#F9F9F9',
+    borderBottomColor: '#212121',
     padding: 10
   },
   username: {
@@ -130,32 +102,20 @@ const styles = StyleSheet.create({
     position: 'relative',
     textAlign: 'center',
     justifyContent: 'center',
-    top: '10%',
-    width: '27%',
-    backgroundColor: '#8AE3B9',
+    top: '7%',
+    width: '80%',
+    backgroundColor: '#212121',
     borderRadius: 23,
-  },
-  bottomButton: {
-    position: 'relative',
-    textAlign: 'center',
-    justifyContent: 'center',
-    top: '20%',
-    borderRadius: 23,
-    backgroundColor: 'white',
-    width: '100%',
   },
   buttonText: {
     fontSize: 20,
+    fontFamily: 'Avenir',
     lineHeight: 45,
     display: 'flex',
     alignItems: 'center',
     textAlign: 'center',
     letterSpacing: 0.035,
-    color: '#FFFFFF',
-  },
-  bottomButtonText: {
-    color: '#ABABAB',
-    top: '80%',
+    color: '#F9F9F9',
   },
 });
 
