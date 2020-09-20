@@ -37,7 +37,7 @@ import { DrawerActions } from 'react-navigation';
 
 const Drawer = createDrawerNavigator();
 
-function DrawerNavigator() {
+export default function MainStackNavigator() {
   /* Query the Realtime db to determine all other users in the vicinity. */
   return (
     <Drawer.Navigator
@@ -57,7 +57,7 @@ function DrawerNavigator() {
 
 const MainNavigator = createStackNavigator();
 
-export default function MainStackNavigator() {
+function MainStackNavigator2() {
   return (
     <MainNavigator.Navigator initialRouteName = "MapScreen"
     screenOptions = {
