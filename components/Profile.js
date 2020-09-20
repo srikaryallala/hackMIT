@@ -43,7 +43,20 @@ export default class Profile extends Component {
       return (
         <View
         style={styles.container1}>
-        <Text style={styles.nameText}>{this.props.name}</Text>
+        <View style={styles.topHalf}>
+        <Image
+          style={styles.topImage}
+          source={require('../assets/images/kurt.png')}
+        />
+        <Text style={[styles.nameText, {
+          paddingTop: 20,
+        }]}>Kurt</Text>
+        <Text style={[styles.nameText, {
+          color: '#b31b1b',
+          fontSize: 25
+      }]}>Active now</Text>
+        </View>
+        <View style={styles.bottomHalf}>
         <TouchableOpacity
         style={styles.button}
         onPress={() => this.props.navigation.navigate('Mailbox')}>
@@ -61,6 +74,7 @@ export default class Profile extends Component {
         />
         <Text style={styles.text}>Report</Text>
         </TouchableOpacity>
+        </View>
 
         </View>
         )
@@ -105,6 +119,16 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
+  topHalf: {
+    flex: 1,
+    top: '10%',
+    alignItems: 'center',
+  },
+  bottomHalf: {
+    flex: 1,
+    top: '-5%',
+    alignItems: 'center',
+  },
   button: {
     justifyContent: 'center',
     width: '80%',
@@ -128,7 +152,10 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   reportImage: {
-    padding: 10,
+    height: '15%',
+    width: '15%',
+    padding: 20,
+    right: 8,
   },
   bottomImage: {
     left: '10%',

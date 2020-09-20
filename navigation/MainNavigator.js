@@ -51,6 +51,7 @@ export default function MainStackNavigator() {
       <Drawer.Screen name="MapScreen" component={MapScreen}/>
       <Drawer.Screen name="Chat" component={Chat}/>
       <Drawer.Screen name="Mailbox" component={Mailbox}/>
+      <Drawer.Screen name="Stranger Profile" component={Profile}/>
     </Drawer.Navigator>
   );
 }
