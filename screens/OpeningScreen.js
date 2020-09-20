@@ -98,6 +98,7 @@ const styles = StyleSheet.create({
   },
   darkText: {
     fontSize: 20,
+    fontFamily: 'Avenir',
     lineHeight: 45,
     display: 'flex',
     alignItems: 'center',
@@ -107,6 +108,7 @@ const styles = StyleSheet.create({
   },
   lightText: {
     fontSize: 20,
+    fontFamily: 'Avenir',
     lineHeight: 45,
     display: 'flex',
     alignItems: 'center',
