@@ -16,6 +16,8 @@ import firebase from '../config/Firebase';
 import { Icon, InlineIcon } from '@iconify/react';
 import mailboxOpenOutline from '@iconify/icons-mdi/mailbox-open-outline';
 
+import { DrawerActions } from 'react-navigation-drawer';
+
 // styling
 const mapStyle = [
   {
@@ -262,7 +264,8 @@ export default class MapScreen extends Component {
          source={require('../assets/images/mailbox.png')}/>
          </TouchableOpacity>
          <TouchableOpacity
-         style={styles.icon}>
+         style={styles.icon}
+         onPress={() => this.props.navigation.openDrawer()}>
          <Image
          source={require('../assets/images/people.png')}/>
          </TouchableOpacity>

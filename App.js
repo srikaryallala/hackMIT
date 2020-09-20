@@ -10,9 +10,11 @@ import AuthStackNavigator from './navigation/AuthStackNavigator'
 import MainNavigator from './navigation/MainNavigator'
 
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import Firebase from './config/Firebase';
+import Firebase, {realtime} from './config/Firebase';
 import Chat from './components/Chat';
 import firebase from './config/Firebase';
+
+import { updateLocation } from './actions/user'
 
 const middleware = applyMiddleware(thunkMiddleware)
 const store = createStore(reducer, middleware)
@@ -42,13 +44,19 @@ export default class App extends Component {
   };
 
   async componentDidMount() {
-    this.findCoordinates();
+    await this.findCoordinates();
     await Firebase.auth().onAuthStateChanged(async user => {
       if(user) {
         this.setState({
           user: user.uid,
           isLoading: false,
         });
+        await store.dispatch(updateLocation(this.state.location))
+        var locationsRef = realtime.ref(this.state.location);
+        locationsRef.set({
+          user: user.uid
+        });
+        locationsRef.ref(this.state.location).child(user.uid).onDisconnect().remove();
       }
       else {
         this.setState({
