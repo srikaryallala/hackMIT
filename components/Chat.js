@@ -35,6 +35,9 @@ export default class Chat extends Component {
     if(doc.exists) {
       //console.log();
       let x = doc.data().messages;
+      if(x == undefined) {
+        x = [];
+      }
       let y = [];
       for(var i = 0; i < x.length;i++) {
         x[i].createdAt = new Date(x[i].createdAt.toDate().toDateString());
@@ -86,6 +89,7 @@ export default class Chat extends Component {
           user={{_id: this.state.user}}
           renderUsernameOnMessage = {true}
           inverted = {false}
+          alwaysShowSend = {true}
         />
         </View>
       );
