@@ -12,6 +12,9 @@ import {
 import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 import firebase from '../config/Firebase';
 
+import { Icon, InlineIcon } from '@iconify/react';
+import mailboxOpenOutline from '@iconify/icons-mdi/mailbox-open-outline';
+
 // styling
 const mapStyle = [
   {
@@ -251,19 +254,23 @@ export default class MapScreen extends Component {
         zoomEnabled={false}
          />
          <TouchableOpacity
+         style={[styles.icon, {left: '7%'}]}>
+         <Image
+         source={require('../assets/images/mailbox.png')}/>
+         </TouchableOpacity>
+         <TouchableOpacity
          style={styles.icon}>
          <Image
-         style={[styles.icon]}
          source={require('../assets/images/people.png')}/>
          </TouchableOpacity>
         <TouchableOpacity
           onPress={() => this.props.navigation.navigate('Chat')}
           style={{justifyContent: 'center', alignItems: 'center', position: 'absolute', top: '80%', backgroundColor: '#B31B1B', height: '10%', width: '55%', borderRadius: 15}}>
-          
+
           <Text style={{ fontSize: 30, lineHeight: 30, color: 'white', textAlign: 'center', textAlignVertical: 'center',  }}>
             JUMP ON
           </Text>
-          
+
         </TouchableOpacity>
         </View>
       );
@@ -294,8 +301,8 @@ const styles = StyleSheet.create({
   // icon styling
   icon: {
     position: 'absolute',
-    top: '50%',
-    borderWidth: 2,
+    top: '8%',
+    right: '7%',
     borderColor: 'white',
   },
 });
