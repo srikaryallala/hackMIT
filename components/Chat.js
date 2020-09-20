@@ -120,7 +120,7 @@ class Chat extends Component {
         <View style={styles.container}>
           <Icon name="chevron-left" size={20} color="#F9F9F9"
             onPress={() => this.props.navigation.navigate('MapScreen')}
-            style={{top: 10, left: 5 , padding: 10, width: 40}}
+            style={styles.back}
           />
         <GiftedChat
           messages = { this.state.messages }
@@ -157,6 +157,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#212121',
     // alignItems: 'center',
     justifyContent: 'center',
+  },
+  back: {
+    top: 10,
+    left: 5 ,
+    padding: 10,
+    width: 40,
   },
   // logout button for debugging purposes
   logoutButton: {
