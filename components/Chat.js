@@ -10,6 +10,8 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { getUser } from '../actions/user'
 
+import Icon from 'react-native-vector-icons/FontAwesome5';
+
 class Chat extends Component {
   constructor(props) {
     super(props);
@@ -30,7 +32,7 @@ class Chat extends Component {
         isLoaded: true,
       })
     }
-    this.props.getUser(this.state.user);
+    await this.props.getUser(this.state.user);
     // look here
     this.setState({name: this.props.user.firstName + " " + this.props.user.lastName})
     //console.log(this.state.name)
@@ -47,12 +49,13 @@ class Chat extends Component {
       }
       //let y = [];
       for(var i = 0; i < x.length;i++) {
-        x[i].createdAt = new Date(x[i].createdAt.toDate().toDateString());
-        //console.log(x[i]);
+
+        x[i].createdAt = x[i].createdAt.toDate();
+
       }
-      
+
       await this.setState({messages: x});
-      
+
       let update = false;
       let z = [];
       docRef.onSnapshot(function(snapshot) {
@@ -66,7 +69,7 @@ class Chat extends Component {
           for(var i = 0; i < z.length;i++) {
             z[i].createdAt = new Date(z[i].createdAt.toDate().toDateString());
           }
-          
+
         }
       });
       if(update) {
@@ -76,8 +79,9 @@ class Chat extends Component {
   }
 
   listeners = () => {
-    
+
   }
+
 
   findCoordinates = async () => {
     await navigator.geolocation.getCurrentPosition(
@@ -100,7 +104,7 @@ class Chat extends Component {
     }
     let y = x.push(messages[0]);
     this.setState({messages: x});
-    
+
 
     // set the remote firebase to update messages accordingly
     db.collection("messages").doc(this.state.location).set({
@@ -114,6 +118,10 @@ class Chat extends Component {
     if(this.state.isLoaded) {
       return (
         <View style={styles.container}>
+          <Icon name="chevron-left" size={20} color="black"
+            onPress={() => this.props.navigation.navigate('MapScreen')}
+            style={{top: 10, left: 5 , padding: 10, width: 40}}
+          />
         <GiftedChat
           messages = { this.state.messages }
           onSend = {messages => this.oSend(messages)}
