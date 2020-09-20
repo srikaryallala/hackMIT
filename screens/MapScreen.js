@@ -254,11 +254,19 @@ export default class MapScreen extends Component {
         zoomEnabled={false}
          />
          <TouchableOpacity
+         style={styles.mailbox}
+         onPress={() => this.props.navigation.navigate('Mailbox')}>
+         <Image
+         source={require('../assets/images/mailbox-open.png')}/>
+         </TouchableOpacity>
+
+         <TouchableOpacity
          style={styles.icon}>
          <Image
          style={[styles.icon]}
          source={require('../assets/images/people.png')}/>
          </TouchableOpacity>
+
         <TouchableOpacity
           onPress={() => this.props.navigation.navigate('Chat')}
           style={styles.button}>
@@ -312,11 +320,16 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     textAlignVertical: 'center',
   },
+  mailbox: {
+    position: 'absolute',
+    top: '5%',
+    left: '7%'
+  },
+
   // icon styling
   icon: {
     position: 'absolute',
     top: '5%',
-    borderWidth: 2,
-    borderColor: 'white',
+    right: '7%',
   },
 });
