@@ -52,10 +52,13 @@ class Chat extends Component {
       }
       
       await this.setState({messages: x});
-
+      
+      let update = false;
+      let z = [];
       docRef.onSnapshot(function(snapshot) {
-        let z = snapshot.data().messages;
+        z = snapshot.data().messages;
         if(x.length != z.length) {
+          update = true;
           if(z == undefined) {
             z = [];
           }
@@ -63,9 +66,12 @@ class Chat extends Component {
           for(var i = 0; i < z.length;i++) {
             z[i].createdAt = new Date(z[i].createdAt.toDate().toDateString());
           }
-          this.setState({messages: z});
+          
         }
       });
+      if(update) {
+        this.setState({messages: z});
+      }
     }
   }
 
