@@ -53,6 +53,7 @@ export default function MainStackNavigator() {
       <Drawer.Screen name="Map" component={Map}/>
       <Drawer.Screen name="Mailbox" component={Mailbox}/>
       <Drawer.Screen name="Stranger Profile" component={Profile}/>
+      <Drawer.Screen name="Chat" component={MainStackNavigator2}/>
     </Drawer.Navigator>
   );
 }
@@ -61,7 +62,7 @@ const MainNavigator = createStackNavigator();
 
 function MainStackNavigator2() {
   return (
-    <MainNavigator.Navigator initialRouteName = "Map"
+    <MainNavigator.Navigator initialRouteName = "Chat"
     screenOptions = {
       {
         headerShown: false
@@ -73,14 +74,9 @@ function MainStackNavigator2() {
       LocationInfo
     }/>
 
-    <MainNavigator.Screen name = "Map"
+    <MainNavigator.Screen name = "MapScreen"
     component = {
       Map
-    }/>
-
-    <MainNavigator.Screen name = "PeopleDrawer"
-    component = {
-      DrawerNavigator
     }/>
 
     <MainNavigator.Screen name = "Chat"

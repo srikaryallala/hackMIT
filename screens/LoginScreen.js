@@ -19,6 +19,9 @@ class LoginScreen extends Component {
     title: 'Login'
   }
 
+  handleLogin = () => {
+    this.props.login()
+  }
   componentDidMount = () => {
     Firebase.auth().onAuthStateChanged(user => {
       if(user) {
@@ -39,7 +42,7 @@ class LoginScreen extends Component {
         onPress={() => this.props.navigation.navigate('Opening')}
         style={styles.back}
       />
-      <Text style={styles.textHeading}>Username</Text>
+      <Text style={styles.textHeading}>Email</Text>
         <TextInput
         value={this.props.user.email}
         onChangeText={email => this.props.updateEmail(email)}
@@ -55,7 +58,7 @@ class LoginScreen extends Component {
         <TouchableOpacity
         title="LOG IN"
         style={styles.button}
-        onPress={() => this.props.navigation.navigate('Login')}
+        onPress={this.handleLogin}
         >
           <Text style={styles.buttonText}>LOG IN</Text>
         </TouchableOpacity>
