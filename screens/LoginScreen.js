@@ -34,18 +34,17 @@ class LoginScreen extends Component {
         style={styles.tinyLogo}
         source={require('../assets/images/ontoologo.png')}
       />
+      <Text style={styles.textHeading}>Username</Text>
         <TextInput
         value={this.props.user.email}
         onChangeText={email => this.props.updateEmail(email)}
         style={[styles.textBar, styles.username]}
-        placeholder='Username'
-        autoCapitalize='none'
         />
+      <Text style={styles.textHeading}>Password</Text>
         <TextInput
         value={this.props.user.password}
         onChangeText={password => this.props.updatePassword(password)}
         style={[styles.textBar, styles.password]}
-        placeholder="Password"
         secureTextEntry={true}
         />
         <TouchableOpacity
@@ -76,6 +75,13 @@ const styles = StyleSheet.create({
     height: '10%',
     top: '-10%'
   },
+  textHeading: {
+    fontFamily: 'Avenir',
+    position: 'relative',
+    paddingRight: 190,
+    color: '#D2D2D2',
+    paddingTop: 10,
+  },
   back: {
     position: 'relative',
     width: '20%'
@@ -91,12 +97,6 @@ const styles = StyleSheet.create({
     borderColor: '#F9F9F9',
     borderBottomColor: '#212121',
     padding: 10
-  },
-  username: {
-    // top: '%',
-  },
-  password: {
-    top: '3%',
   },
   button: {
     position: 'relative',
