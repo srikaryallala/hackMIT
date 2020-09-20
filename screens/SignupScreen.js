@@ -13,11 +13,6 @@ import { Text, View, Image, StyleSheet, TouchableOpacity, Alert, TextInput } fro
 // fonts
 import * as Font from 'expo-font';
 
-let customFonts = {
-  'Barlow-Regular': require('../assets/fonts/Barlow-Regular.ttf'),
-  'Barlow-Medium': require('../assets/fonts/Barlow-Medium.ttf'),
-};
-
 // Optionally import the services that you want to use
 import "firebase/auth";
 import "firebase/database";

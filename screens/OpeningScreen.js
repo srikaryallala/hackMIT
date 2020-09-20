@@ -13,12 +13,6 @@ import Firebase from '../config/Firebase'
 import * as Font from 'expo-font';
 import { useFonts } from 'expo-font';
 
-let customFonts = {
-  'Barlow-Regular': require('../assets/fonts/Barlow-Regular.ttf'),
-  'Barlow-Medium': require('../assets/fonts/Barlow-Medium.ttf'),
-};
-
-
 class OpeningScreen extends Component {
   static navigationOptions = {
     title: 'OpeningScreen'
