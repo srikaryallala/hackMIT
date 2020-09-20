@@ -6,6 +6,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Image,
   Dimensions
 } from 'react-native';
 import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
@@ -249,6 +250,12 @@ export default class MapScreen extends Component {
         scrollEnabled={false}
         zoomEnabled={false}
          />
+         <TouchableOpacity
+         style={styles.icon}>
+         <Image
+         style={[styles.icon]}
+         source={require('../assets/images/people.png')}/>
+         </TouchableOpacity>
         <TouchableOpacity
         onPress={() => this.props.navigation.navigate('Chat')}
         style={{
@@ -289,5 +296,12 @@ const styles = StyleSheet.create({
   mapStyle: {
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height,
+  },
+  // icon styling
+  icon: {
+    position: 'absolute',
+    top: '50%',
+    borderWidth: 2,
+    borderColor: 'white',
   },
 });
