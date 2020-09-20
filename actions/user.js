@@ -5,15 +5,13 @@ import firebase from 'firebase'
 export const UPDATE_EMAIL = 'UPDATE_EMAIL'
 export const UPDATE_FIRSTNAME = 'UPDATE_FIRSTNAME'
 export const UPDATE_LASTNAME = 'UPDATE_LASTNAME'
+export const UPDATE_LOCATION = 'UPDATE_LOCATION'
 export const UPDATE_USERNAME = 'UPDATE_USERNAME'
 export const UPDATE_PASSWORD = 'UPDATE_PASSWORD'
-export const UPDATE_RIGHTS = 'UPDATE_RIGHTS'
 
 export const LOGIN = 'LOGIN'
 export const LOGOUT = 'LOGOUT'
 export const SIGNUP = 'SIGNUP'
-export const GET_LISTINGS = 'GET_LISTINGS'
-export const GET_SAVED_ITEMS = 'GET_SAVED_ITEMS'
 export const GET_USER_CHATS = 'GET_USER_CHATS'
 
 // actions
@@ -46,6 +44,13 @@ export const updatePassword = password => {
   return {
     type: UPDATE_PASSWORD,
     payload: password
+  }
+}
+
+export const updateLocation = location => {
+  return {
+    type: UPDATE_LOCATION,
+    payload: location
   }
 }
 

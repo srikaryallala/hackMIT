@@ -21,7 +21,6 @@ export const fetchRoom = (roomName, buyerID, sellerID) => {
       const chatRoom = {
         buyer: buyerID,
         seller: sellerID,
-        itemID: "",
         messages: [],
       }
       db.collection('chats').add(chatRoom);
