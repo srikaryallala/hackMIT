@@ -52,27 +52,15 @@ class Chat extends Component {
       }
       
       await this.setState({messages: x});
-      
-      let update = false;
-      let z = [];
-      docRef.onSnapshot(function(snapshot) {
-        z = snapshot.data().messages;
-        if(x.length != z.length) {
-          update = true;
-          if(z == undefined) {
-            z = [];
-          }
-          //let y = [];
-          for(var i = 0; i < z.length;i++) {
-            z[i].createdAt = new Date(z[i].createdAt.toDate().toDateString());
-          }
-          
-        }
-      });
-      if(update) {
-        this.setState({messages: z});
-      }
+      //this.timer();
     }
+  }
+
+  timer = () => {
+    setTimeout(() => {
+      //console.log('restarted');
+      this.findMessages();
+    },30000)
   }
 
   listeners = () => {
