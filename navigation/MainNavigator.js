@@ -52,6 +52,7 @@ export default function MainStackNavigator() {
     drawerBackgroundColor={'#F9F9F9'}>
       <Drawer.Screen name="Map" component={Map}/>
       <Drawer.Screen name="Mailbox" component={Mailbox}/>
+      <Drawer.Screen name="Stranger Profile" component={Profile}/>
     </Drawer.Navigator>
   );
 }

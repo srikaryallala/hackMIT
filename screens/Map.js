@@ -18,6 +18,14 @@ import mailboxOpenOutline from '@iconify/icons-mdi/mailbox-open-outline';
 
 import { DrawerActions } from 'react-navigation-drawer';
 
+// redux magic
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { getUser } from '../actions/user';
+
+// firebase imports
+import Firebase, { realtime } from '../config/Firebase';
+
 // styling
 const mapStyle = [
   {
@@ -206,7 +214,7 @@ const mapStyle = [
   }
 ]
 
-export default class MapScreen extends Component {
+class MapScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -216,17 +224,29 @@ export default class MapScreen extends Component {
   }
 
   async componentDidMount() {
-    await this.findCoordinates();
+    // await this.fetchOthersNearby();
+    await this.findCoordinates()
+    console.log(this.state.location)
   }
 
-  findChatRoom = () => {
-
-  };
+  fetchOthersNearby = async () => {
+    await this.findCoordinates();
+    if(!this.state.isLoading) {
+      var query = await realtime.ref(this.state.location).then(function(snapshot) {
+        snapshot.forEach(function(childSnapshot){
+          console.log(childSnapshot)
+          var key = childSnapshot.key;
+          var childData=childSnapshot.data();
+        })
+      })
+    }
+  }
 
   findCoordinates = async () => {
-    await navigator.geolocation.getCurrentPosition(
+    navigator.geolocation.getCurrentPosition(
       position => {
         const location = [position.coords.latitude.toFixed(0),position.coords.longitude.toFixed(0)];
+        // console.log(location)
         this.setState({
           location: location,
           isLoading: false,
@@ -235,7 +255,6 @@ export default class MapScreen extends Component {
       error => console.log(error.message),
       { enableHighAccuracy: false, timeout: 0, maximumAge: 10000 }
     )
-
   };
 
   render() {
@@ -339,3 +358,18 @@ const styles = StyleSheet.create({
     color: '#F9F9F9'
   },
 });
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ getUser, }, dispatch)
+}
+
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MapScreen)
