@@ -259,9 +259,10 @@ export default class MapScreen extends Component {
         zoomEnabled={false}
          />
          <TouchableOpacity
-         style={[styles.icon, {left: '7%'}]}>
+         style={[styles.icon, {left: '7%'}]}
+         onPress = {() => this.props.navigation.navigate('Mailbox')}>
          <Image
-         source={require('../assets/images/mailbox.png')}/>
+         source={require('../assets/images/mailbox-open.png')}/>
          </TouchableOpacity>
          <TouchableOpacity
          style={styles.icon}
@@ -274,9 +275,7 @@ export default class MapScreen extends Component {
           onPress={() => this.props.navigation.navigate('Chat')}
           style={{justifyContent: 'center', alignItems: 'center', position: 'absolute', top: '80%', backgroundColor: '#B31B1B', height: '10%', width: '55%', borderRadius: 15}}>
 
-          <Text style={{ fontSize: 30, lineHeight: 30, color: 'white', textAlign: 'center', textAlignVertical: 'center',  }}>
-            JUMP ON
-          </Text>
+        <Text style={styles.jump}>JUMP ON</Text>
 
         </TouchableOpacity>
         </View>
@@ -304,6 +303,13 @@ const styles = StyleSheet.create({
   mapStyle: {
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height,
+  },
+  jump: {
+    fontSize: 30,
+    lineHeight: 30,
+    color: 'white',
+    textAlign: 'center',
+    textAlignVertical: 'center',
   },
   button: {
     justifyContent: 'center',

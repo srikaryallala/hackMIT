@@ -4,6 +4,7 @@ import SignupScreen from '../screens/SignupScreen'
 import LocationInfo from '../screens/LocationInfo'
 import MapScreen from '../screens/MapScreen'
 import Chat from '../components/Chat'
+import Profile from '../components/Profile'
 import Mailbox from '../screens/Mailbox'
 
 import {
@@ -89,6 +90,11 @@ export default function MainStackNavigator() {
     component = {
       Mailbox
     }/>
+
+      <MainNavigator.Screen
+        name="Profile"
+        component = {Profile}
+      />
 
     </MainNavigator.Navigator>
   );
