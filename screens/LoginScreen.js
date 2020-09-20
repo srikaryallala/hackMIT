@@ -12,6 +12,7 @@ import Firebase from '../config/Firebase'
 
 import * as Font from 'expo-font';
 import { useFonts } from 'expo-font';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 
 class LoginScreen extends Component {
   static navigationOptions = {

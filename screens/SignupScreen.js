@@ -9,6 +9,7 @@ import { updateFirstName, updateLastName, updateUsername, updateEmail, updatePas
 import React, { Component } from 'react';
 import { Button } from 'react-native-elements';
 import { Text, View, Image, StyleSheet, TouchableOpacity, Alert, TextInput } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 
 // fonts
 import * as Font from 'expo-font';
