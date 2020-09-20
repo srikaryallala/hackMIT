@@ -236,7 +236,7 @@ export default class MapScreen extends Component {
   render() {
     if(!this.state.isLoading) {
       return(
-        
+
         <View style={styles.container}>
           <StatusBar hidden />
         <MapView
@@ -263,7 +263,7 @@ export default class MapScreen extends Component {
           onPress={() => this.props.navigation.navigate('Chat')}
           style={styles.button}>
 
-          <Text style={{ fontSize: 30, lineHeight: 30, color: 'white', textAlign: 'center', textAlignVertical: 'center',  }}>
+          <Text style={styles.buttonText}>
             JUMP ON
           </Text>
 
@@ -298,16 +298,26 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     position: 'absolute',
-    top: '80%', backgroundColor:
-    '#B31B1B',
+    top: '82%',
+    backgroundColor: '#B31B1B',
     height: '7%',
-    width: '55%',
-    borderRadius: 15
+    width: '70%',
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: '#F9F9F9',
+  },
+  buttonText: {
+    fontFamily: 'Avenir-Medium',
+    fontSize: 25,
+    lineHeight: 30,
+    color: 'white',
+    textAlign: 'center',
+    textAlignVertical: 'center',
   },
   // icon styling
   icon: {
     position: 'absolute',
-    top: '50%',
+    top: '5%',
     borderWidth: 2,
     borderColor: 'white',
   },
