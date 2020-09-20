@@ -21,7 +21,7 @@ export default class Chat extends Component {
     await this.findCoordinates();
     let user = await Firebase.auth().currentUser;
       if(user) {
-        console.log(user)
+        //console.log(user)
         this.setState({
           user: user.uid,
           isLoaded: true,
