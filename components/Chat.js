@@ -50,9 +50,9 @@ class Chat extends Component {
         x[i].createdAt = new Date(x[i].createdAt.toDate().toDateString());
         //console.log(x[i]);
       }
-      
+
       await this.setState({messages: x});
-      
+
       let update = false;
       let z = [];
       docRef.onSnapshot(function(snapshot) {
@@ -66,7 +66,7 @@ class Chat extends Component {
           for(var i = 0; i < z.length;i++) {
             z[i].createdAt = new Date(z[i].createdAt.toDate().toDateString());
           }
-          
+
         }
       });
       if(update) {
@@ -76,7 +76,7 @@ class Chat extends Component {
   }
 
   listeners = () => {
-    
+
   }
 
   findCoordinates = async () => {
@@ -100,7 +100,7 @@ class Chat extends Component {
     }
     let y = x.push(messages[0]);
     this.setState({messages: x});
-    
+
 
     // set the remote firebase to update messages accordingly
     db.collection("messages").doc(this.state.location).set({
@@ -114,6 +114,10 @@ class Chat extends Component {
     if(this.state.isLoaded) {
       return (
         <View style={styles.container}>
+        <TouchableOpacity
+        onPress={() => this.props.navigation.navigate('MapScreen')}>
+        <Text style={{top: 40, right: -20, padding: 20, borderWidth: 1,}}>mapify</Text>
+        </TouchableOpacity>
         <GiftedChat
           messages = { this.state.messages }
           onSend = {messages => this.oSend(messages)}
