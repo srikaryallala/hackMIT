@@ -30,7 +30,7 @@ class Chat extends Component {
         isLoaded: true,
       })
     }
-    this.props.getUser(this.state.user);
+    await this.props.getUser(this.state.user);
     // look here
     this.setState({name: this.props.user.firstName + " " + this.props.user.lastName})
     //console.log(this.state.name)
@@ -47,8 +47,9 @@ class Chat extends Component {
       }
       //let y = [];
       for(var i = 0; i < x.length;i++) {
-        x[i].createdAt = new Date(x[i].createdAt.toDate().toDateString());
-        //console.log(x[i]);
+
+        x[i].createdAt = x[i].createdAt.toDate();
+
       }
 
       await this.setState({messages: x});
@@ -78,6 +79,7 @@ class Chat extends Component {
   listeners = () => {
 
   }
+
 
   findCoordinates = async () => {
     await navigator.geolocation.getCurrentPosition(
