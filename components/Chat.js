@@ -47,8 +47,9 @@ class Chat extends Component {
       }
       //let y = [];
       for(var i = 0; i < x.length;i++) {
-        x[i].createdAt = new Date(x[i].createdAt.toDate().toDateString());
-        //console.log(x[i]);
+        
+        x[i].createdAt = x[i].createdAt.toDate();
+        
       }
       
       await this.setState({messages: x});
@@ -63,9 +64,6 @@ class Chat extends Component {
     },30000)
   }
 
-  listeners = () => {
-    
-  }
 
   findCoordinates = async () => {
     await navigator.geolocation.getCurrentPosition(
