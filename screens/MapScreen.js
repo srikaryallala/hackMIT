@@ -258,12 +258,12 @@ export default class MapScreen extends Component {
          </TouchableOpacity>
         <TouchableOpacity
           onPress={() => this.props.navigation.navigate('Chat')}
-          style={{justifyContent: 'center', alignItems: 'center', position: 'absolute', top: '80%', backgroundColor: '#B31B1B', height: '10%', width: '55%', borderRadius: 15}}>
-          
+          style={styles.button}>
+
           <Text style={{ fontSize: 30, lineHeight: 30, color: 'white', textAlign: 'center', textAlignVertical: 'center',  }}>
             JUMP ON
           </Text>
-          
+
         </TouchableOpacity>
         </View>
       );
@@ -290,6 +290,16 @@ const styles = StyleSheet.create({
   mapStyle: {
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height,
+  },
+  button: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
+    top: '80%', backgroundColor:
+    '#B31B1B',
+    height: '7%',
+    width: '55%',
+    borderRadius: 15
   },
   // icon styling
   icon: {
