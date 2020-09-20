@@ -4,6 +4,7 @@ import SignupScreen from '../screens/SignupScreen'
 import LocationInfo from '../screens/LocationInfo'
 import MapScreen from '../screens/MapScreen'
 import Chat from '../components/Chat'
+import Profile from '../components/Profile'
 import Mailbox from '../screens/Mailbox'
 
 import { Ionicons } from '@expo/vector-icons';
@@ -43,6 +44,11 @@ export default function MainStackNavigator() {
       <MainNavigator.Screen
         name="Mailbox"
         component = {Mailbox}
+      />
+
+      <MainNavigator.Screen
+        name="Profile"
+        component = {Profile}
       />
 
     </MainNavigator.Navigator>

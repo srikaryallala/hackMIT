@@ -257,12 +257,12 @@ export default class MapScreen extends Component {
         zoomEnabled={false}
          />
          <TouchableOpacity
-         style={[styles.icon, {left: '7%'}]}>
+         style={[styles.icon, {left: '7%'}]}
+         onPress = {() => this.props.navigation.navigate('Mailbox')}>
          <Image
-         source={require('../assets/images/mailbox.png')}/>
+         source={require('../assets/images/mailbox-open.png')}/>
          </TouchableOpacity>
          <TouchableOpacity
-         style={styles.icon}>
          <Image
          source={require('../assets/images/people.png')}/>
          </TouchableOpacity>
