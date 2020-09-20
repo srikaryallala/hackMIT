@@ -29,7 +29,20 @@ export default class App extends Component {
     };
   }
 
+  findCoordinates = async () => {
+    await navigator.geolocation.getCurrentPosition(
+      position => {
+        var location = [position.coords.latitude.toFixed(0),position.coords.longitude.toFixed(0)];
+        location = location.toString();
+        this.setState({location});
+      },
+      error => console.log(error.message),
+      { enableHighAccuracy: false, timeout: 0, maximumAge: 10000 }
+    );
+  };
+
   async componentDidMount() {
+    this.findCoordinates();
     await Firebase.auth().onAuthStateChanged(async user => {
       if(user) {
         this.setState({

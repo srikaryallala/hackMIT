@@ -6,19 +6,15 @@ import { ObjectUnsubscribedError } from 'rxjs';
 import Firebase, { db } from '../config/Firebase';
 import firebase from '../config/Firebase';
 
-export default class Chat extends Component {
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { getUser } from '../actions/user'
+
+class Chat extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      messages: [{
-        _id: 0,
-        text: 'Hello',
-        createdAt: new Date(),
-        user: {
-          _id: 2,
-          name: 'React Native',
-        },
-      },],
+      messages: [],
       user: null,
       isLoaded: false,
       location: null,
@@ -28,25 +24,53 @@ export default class Chat extends Component {
   async componentDidMount() {
     await this.findCoordinates();
     let user = await Firebase.auth().currentUser;
-      if(user) {
-        this.setState({
-          user: user.uid,
-          isLoaded: true,
-        })
-      }
+    if(user) {
+      this.setState({
+        user: user.uid,
+        isLoaded: true,
+      })
+    }
+    this.props.getUser(this.state.user);
+    // look here
+    this.setState({name: this.props.user.firstName + " " + this.props.user.lastName})
+    //console.log(this.state.name)
   }
 
   findMessages = async () => {
     var docRef = db.collection('messages').doc(this.state.location.toString())
     const doc = await docRef.get();
     if(doc.exists) {
-      console.log(doc.data());
+      //console.log();
+      let x = doc.data().messages;
+      if(x == undefined) {
+        x = [];
+      }
+      //let y = [];
+      for(var i = 0; i < x.length;i++) {
+        x[i].createdAt = new Date(x[i].createdAt.toDate().toDateString());
+        //console.log(x[i]);
+      }
+      
+      await this.setState({messages: x});
+
+      docRef.onSnapshot(function(snapshot) {
+        let z = snapshot.data().messages;
+        if(x.length != z.length) {
+          if(z == undefined) {
+            z = [];
+          }
+          //let y = [];
+          for(var i = 0; i < z.length;i++) {
+            z[i].createdAt = new Date(z[i].createdAt.toDate().toDateString());
+          }
+          this.setState({messages: z});
+        }
+      });
     }
+  }
+
+  listeners = () => {
     
-    // .onSnapshot(function(doc) {
-    //   console.log(doc.data());
-    // });
-    //unsubscribe();
   }
 
   findCoordinates = async () => {
@@ -64,13 +88,17 @@ export default class Chat extends Component {
 
   oSend(messages) {
     let x = this.state.messages;
+    //console.log(this.state.messages);
+    if(this.state.messages == undefined) {
+      x = [];
+    }
     let y = x.push(messages[0]);
     this.setState({messages: x});
+    
 
     // set the remote firebase to update messages accordingly
     db.collection("messages").doc(this.state.location).set({
-      location: this.state.location,
-      message: messages[0],
+      messages: this.state.messages,
     }).then(() => {
       console.log("successfully added a new message!")
     })
@@ -83,9 +111,15 @@ export default class Chat extends Component {
         <GiftedChat
           messages = { this.state.messages }
           onSend = {messages => this.oSend(messages)}
-          user={{_id: this.state.user}}
+          user={
+            {
+              _id: this.state.user,
+              name: this.state.name,
+            }
+          }
           renderUsernameOnMessage = {true}
           inverted = {false}
+          alwaysShowSend = {true}
         />
         </View>
       );
@@ -122,7 +156,7 @@ const styles = StyleSheet.create({
 });
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ getUser, logout }, dispatch)
+  return bindActionCreators({ getUser }, dispatch)
 }
 
 const mapStateToProps = state => {
@@ -130,3 +164,8 @@ const mapStateToProps = state => {
     user: state.user
   }
 }
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Chat)
