@@ -118,7 +118,7 @@ class Chat extends Component {
     if(this.state.isLoaded) {
       return (
         <View style={styles.container}>
-          <Icon name="chevron-left" size={20} color="white"
+          <Icon name="chevron-left" size={20} color="#F9F9F9"
             onPress={() => this.props.navigation.navigate('MapScreen')}
             style={{top: 10, left: 5 , padding: 10, width: 40}}
           />
