@@ -19,9 +19,9 @@ let customFonts = {
 };
 
 
-class LoginScreen extends Component {
+class OpeningScreen extends Component {
   static navigationOptions = {
-    title: 'Login'
+    title: 'OpeningScreen'
   }
 
   componentDidMount = () => {
@@ -38,34 +38,15 @@ class LoginScreen extends Component {
       style={styles.container}>
       <Image
         style={styles.tinyLogo}
-        source={require('../assets/images/backarrow.svg')}
+        source={require('../assets/images/ontoologo.png')}
       />
-        <Text style={styles.title}>Login</Text>
-        <TextInput
-        value={this.props.user.email}
-        onChangeText={email => this.props.updateEmail(email)}
-        style={[styles.textBar, styles.username]}
-        placeholder="email"
-        autoCapitalize='none'
-        />
-        <TextInput
-        value={this.props.user.password}
-        onChangeText={password => this.props.updatePassword(password)}
-        style={[styles.textBar, styles.password]}
-        placeholder="password"
-        secureTextEntry={true}
-        />
-        <LinearGradient
-          // Button Linear Gradient
-          colors={['#94DFBC', '#48DBC9']}
-          style={styles.button}>
-            <TouchableOpacity
-            title="Login"
-            onPress={this.props.login}
-            >
-              <Text style={styles.buttonText}>Sign in</Text>
-            </TouchableOpacity>
-        </LinearGradient>
+        <TouchableOpacity
+        title="LOG IN"
+        style={styles.topButton}
+        onPress={() => this.props.navigation.navigate('Login')}
+        >
+          <Text style={styles.darkText}>LOG IN</Text>
+        </TouchableOpacity>
 
         <TouchableOpacity
         title="Signup"
@@ -73,7 +54,7 @@ class LoginScreen extends Component {
         onPress={() => this.props.navigation.navigate('Signup')}
         buttonStyle={styles.button}
         >
-          <Text style={[styles.buttonText, styles.bottomButtonText]}>Don't have an account yet? Sign up :)</Text>
+          <Text style={styles.lightText}>SIGN UP</Text>
         </TouchableOpacity>
       </View>
     );
@@ -85,76 +66,53 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'white',
+    backgroundColor: '#212121',
     width: '100%',
     height: '100%',
   },
   tinyLogo: {
     position: 'relative',
-    width: '10%',
-    height: '7%',
-    top: '-20%',
-    color: '#212121'
+    width: '50%',
+    height: '10%',
+    top: '-10%',
   },
-  title: {
-    position: 'relative',
-    fontSize: 35,
-    lineHeight: 41,
-    fontWeight: 'bold',
-    color: '#C4C4C4',
-    width: '100%',
-    height: '5%',
-    left: '15%',
-    paddingBottom: 60,
-  },
-  textBar: {
-    position: 'relative',
-    justifyContent: 'center',
-    width: '75%',
-    height: '5%',
-    backgroundColor: '#FFFFFF',
-    borderColor: '#C4C4C4',
-    borderWidth: 1,
-    borderRadius: 50,
-    color: 'black',
-    padding: 10
-  },
-  username: {
-    // top: '%',
-  },
-  password: {
-    top: '3%',
-  },
-  button: {
+  topButton: {
     position: 'relative',
     textAlign: 'center',
     justifyContent: 'center',
-    top: '10%',
-    width: '27%',
-    backgroundColor: '#8AE3B9',
+    top: '0%',
+    width: '80%',
+    backgroundColor: '#F9F9F9',
     borderRadius: 23,
   },
   bottomButton: {
     position: 'relative',
     textAlign: 'center',
     justifyContent: 'center',
-    top: '20%',
+    top: '3%',
+    width: '80%',
+    backgroundColor: '#212121',
     borderRadius: 23,
-    backgroundColor: 'white',
-    width: '100%',
+    borderWidth: 2,
+    borderColor: '#F9F9F9'
   },
-  buttonText: {
+  darkText: {
     fontSize: 20,
     lineHeight: 45,
     display: 'flex',
     alignItems: 'center',
     textAlign: 'center',
     letterSpacing: 0.035,
-    color: '#FFFFFF',
+    color: '#212121',
   },
-  bottomButtonText: {
-    color: '#ABABAB',
-    top: '80%',
+  lightText: {
+    fontSize: 20,
+    lineHeight: 45,
+    display: 'flex',
+    alignItems: 'center',
+    textAlign: 'center',
+    letterSpacing: 0.035,
+    color: '#F9F9F9',
   },
 });
 
@@ -171,4 +129,4 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(LoginScreen)
+)(OpeningScreen)

@@ -1,3 +1,4 @@
+import OpeningScreen from '../screens/OpeningScreen'
 import LoginScreen from '../screens/LoginScreen'
 import SignupScreen from '../screens/SignupScreen'
 
@@ -21,12 +22,16 @@ const AuthStack = createStackNavigator();
 export default function AuthStackNavigator() {
   return (
     <AuthStack.Navigator
-      initialRouteName="Login"
+      initialRouteName="Opening"
       screenOptions={{
         headerShown: false
       }}
     >
-      <AuthStack.Screen
+    <AuthStack.Screen
+      name="Opening"
+      component = {OpeningScreen}
+    />
+    <AuthStack.Screen
         name="Login"
         component = {LoginScreen}
       />
