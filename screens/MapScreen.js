@@ -1,3 +1,4 @@
+import { StatusBar } from 'expo-status-bar';
 import React, {
   Component
 } from 'react';
@@ -235,7 +236,9 @@ export default class MapScreen extends Component {
   render() {
     if(!this.state.isLoading) {
       return(
+        
         <View style={styles.container}>
+          <StatusBar hidden />
         <MapView
         style={styles.mapStyle}
         customMapStyle={mapStyle}
