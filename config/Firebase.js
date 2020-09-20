@@ -32,6 +32,7 @@ login = async (user, success_callback, failed_callback) => {
   .then(success_callback, failed_callback);
 };
 
-export const db = firebase.firestore()
+export const db = firebase.firestore();
+export const realtime = firebase.database();
 
 export default Firebase;
