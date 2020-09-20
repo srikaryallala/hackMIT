@@ -34,6 +34,10 @@ class LoginScreen extends Component {
         style={styles.tinyLogo}
         source={require('../assets/images/ontoologo.png')}
       />
+      <Icon name="chevron-left" size={20} color="white"
+        onPress={() => this.props.navigation.navigate('Opening')}
+        style={styles.back}
+      />
       <Text style={styles.textHeading}>Username</Text>
         <TextInput
         value={this.props.user.email}
@@ -83,8 +87,10 @@ const styles = StyleSheet.create({
     paddingTop: 10,
   },
   back: {
-    position: 'relative',
-    width: '20%'
+    top: 10,
+    left: 5 ,
+    padding: 10,
+    width: 40,
   },
   textBar: {
     fontFamily: 'Avenir',

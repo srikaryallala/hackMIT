@@ -263,9 +263,7 @@ export default class MapScreen extends Component {
           onPress={() => this.props.navigation.navigate('Chat')}
           style={styles.button}>
 
-          <Text style={styles.buttonText}>
-            JUMP ON
-          </Text>
+          <Text style={styles.buttonText}>JUMP ON</Text>
 
         </TouchableOpacity>
         </View>
