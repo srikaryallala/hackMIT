@@ -1,3 +1,4 @@
+import { StatusBar } from 'expo-status-bar';
 import React, {
   Component
 } from 'react';
@@ -238,7 +239,9 @@ export default class MapScreen extends Component {
   render() {
     if(!this.state.isLoading) {
       return(
+
         <View style={styles.container}>
+          <StatusBar hidden />
         <MapView
         style={styles.mapStyle}
         customMapStyle={mapStyle}
@@ -297,6 +300,26 @@ const styles = StyleSheet.create({
   mapStyle: {
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height,
+  },
+  button: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
+    top: '82%',
+    backgroundColor: '#B31B1B',
+    height: '7%',
+    width: '70%',
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: '#F9F9F9',
+  },
+  buttonText: {
+    fontFamily: 'Avenir-Medium',
+    fontSize: 25,
+    lineHeight: 30,
+    color: 'white',
+    textAlign: 'center',
+    textAlignVertical: 'center',
   },
   // icon styling
   icon: {

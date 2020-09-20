@@ -118,9 +118,9 @@ class Chat extends Component {
     if(this.state.isLoaded) {
       return (
         <View style={styles.container}>
-          <Icon name="chevron-left" size={20} color="black"
+          <Icon name="chevron-left" size={20} color="#F9F9F9"
             onPress={() => this.props.navigation.navigate('MapScreen')}
-            style={{top: 10, left: 5 , padding: 10, width: 40}}
+            style={styles.back}
           />
         <GiftedChat
           messages = { this.state.messages }
@@ -134,6 +134,8 @@ class Chat extends Component {
           renderUsernameOnMessage = {true}
           inverted = {false}
           alwaysShowSend = {true}
+          //textInputStyle = {{textAlignVertical: 'center', backgroundColor: '#212121', color: 'white', padding: 15, borderRadius: 15,}}
+          //style={{backgroundColor: 'red'}}
         />
         </View>
       );
@@ -152,9 +154,15 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     width: '100%',
     height: '100%',
-    backgroundColor: '#fff',
+    backgroundColor: '#212121',
     // alignItems: 'center',
     justifyContent: 'center',
+  },
+  back: {
+    top: 10,
+    left: 5 ,
+    padding: 10,
+    width: 40,
   },
   // logout button for debugging purposes
   logoutButton: {
