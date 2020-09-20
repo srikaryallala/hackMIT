@@ -2,7 +2,7 @@ import LoginScreen from '../screens/LoginScreen'
 import SignupScreen from '../screens/SignupScreen'
 
 import LocationInfo from '../screens/LocationInfo'
-import MapScreen from '../screens/MapScreen'
+import Map from '../screens/Map'
 import Chat from '../components/Chat'
 import Profile from '../components/Profile'
 import Mailbox from '../screens/Mailbox'
@@ -41,15 +41,16 @@ export default function MainStackNavigator() {
   /* Query the Realtime db to determine all other users in the vicinity. */
   return (
     <Drawer.Navigator
-    initialRouteName="MapScreen"
+    initialRouteName="Map"
     screenOptions={
       {
         headerShown: false,
       }
     }
-    drawerType={"right"}>
-      <Drawer.Screen name="MapScreen" component={MapScreen}/>
-      <Drawer.Screen name="Chat" component={Chat}/>
+    drawerType={"right"}
+    drawerPosition={'right'}
+    drawerBackgroundColor={'#F9F9F9'}>
+      <Drawer.Screen name="Map" component={Map}/>
       <Drawer.Screen name="Mailbox" component={Mailbox}/>
     </Drawer.Navigator>
   );
@@ -59,7 +60,7 @@ const MainNavigator = createStackNavigator();
 
 function MainStackNavigator2() {
   return (
-    <MainNavigator.Navigator initialRouteName = "MapScreen"
+    <MainNavigator.Navigator initialRouteName = "Map"
     screenOptions = {
       {
         headerShown: false
@@ -71,9 +72,9 @@ function MainStackNavigator2() {
       LocationInfo
     }/>
 
-    <MainNavigator.Screen name = "MapScreen"
+    <MainNavigator.Screen name = "Map"
     component = {
-      MapScreen
+      Map
     }/>
 
     <MainNavigator.Screen name = "PeopleDrawer"
