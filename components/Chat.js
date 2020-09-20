@@ -6,7 +6,11 @@ import { ObjectUnsubscribedError } from 'rxjs';
 import Firebase, { db } from '../config/Firebase';
 import firebase from '../config/Firebase';
 
-export default class Chat extends Component {
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { getUser } from '../actions/user'
+
+class Chat extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -20,13 +24,15 @@ export default class Chat extends Component {
   async componentDidMount() {
     await this.findCoordinates();
     let user = await Firebase.auth().currentUser;
-      if(user) {
-        //console.log(user)
-        this.setState({
-          user: user.uid,
-          isLoaded: true,
-        })
-      }
+    if(user) {
+      this.setState({
+        user: user.uid,
+        isLoaded: true,
+      })
+    }
+    this.props.getUser(this.state.user);
+    // look here
+    console.log(this.props.user)
   }
 
   findMessages = async () => {
@@ -42,7 +48,7 @@ export default class Chat extends Component {
       }
       this.setState({messages: x});
     }
-    
+
     // .onSnapshot(function(doc) {
     //   console.log(doc.data());
     // });
@@ -66,7 +72,7 @@ export default class Chat extends Component {
     //console.log(this.state.messages);
     let y = x.push(messages[0]);
     this.setState({messages: x});
-    
+
 
     // set the remote firebase to update messages accordingly
     db.collection("messages").doc(this.state.location).set({
@@ -122,7 +128,7 @@ const styles = StyleSheet.create({
 });
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ getUser, logout }, dispatch)
+  return bindActionCreators({ getUser }, dispatch)
 }
 
 const mapStateToProps = state => {
@@ -130,3 +136,8 @@ const mapStateToProps = state => {
     user: state.user
   }
 }
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Chat)
