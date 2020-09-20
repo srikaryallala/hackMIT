@@ -10,6 +10,8 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { getUser } from '../actions/user'
 
+import Icon from 'react-native-vector-icons/FontAwesome5';
+
 class Chat extends Component {
   constructor(props) {
     super(props);
@@ -116,10 +118,10 @@ class Chat extends Component {
     if(this.state.isLoaded) {
       return (
         <View style={styles.container}>
-        <TouchableOpacity
-        onPress={() => this.props.navigation.navigate('MapScreen')}>
-        <Text style={{top: 40, right: -20, padding: 20, borderWidth: 1,}}>mapify</Text>
-        </TouchableOpacity>
+          <Icon name="chevron-left" size={20} color="black"
+            onPress={() => this.props.navigation.navigate('MapScreen')}
+            style={{top: 10, left: 5 , padding: 10, width: 40}}
+          />
         <GiftedChat
           messages = { this.state.messages }
           onSend = {messages => this.oSend(messages)}
