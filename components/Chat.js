@@ -10,15 +10,7 @@ export default class Chat extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      messages: [{
-        _id: 0,
-        text: 'Hello',
-        createdAt: new Date(),
-        user: {
-          _id: 2,
-          name: 'React Native',
-        },
-      },],
+      messages: [],
       user: null,
       isLoaded: false,
       location: null,
@@ -29,6 +21,7 @@ export default class Chat extends Component {
     await this.findCoordinates();
     let user = await Firebase.auth().currentUser;
       if(user) {
+        console.log(user)
         this.setState({
           user: user.uid,
           isLoaded: true,
@@ -40,13 +33,19 @@ export default class Chat extends Component {
     var docRef = db.collection('messages').doc(this.state.location.toString())
     const doc = await docRef.get();
     if(doc.exists) {
-      console.log(doc.data());
+      //console.log();
+      let x = doc.data().messages;
+      let y = [];
+      for(var i = 0; i < x.length;i++) {
+        x[i].createdAt = new Date(x[i].createdAt.toDate().toDateString());
+        //console.log(x[i]);
+      }
+      this.setState({messages: x});
     }
     
     // .onSnapshot(function(doc) {
     //   console.log(doc.data());
     // });
-    //unsubscribe();
   }
 
   findCoordinates = async () => {
@@ -64,13 +63,14 @@ export default class Chat extends Component {
 
   oSend(messages) {
     let x = this.state.messages;
+    //console.log(this.state.messages);
     let y = x.push(messages[0]);
     this.setState({messages: x});
+    
 
     // set the remote firebase to update messages accordingly
     db.collection("messages").doc(this.state.location).set({
-      location: this.state.location,
-      message: messages[0],
+      messages: this.state.messages,
     }).then(() => {
       console.log("successfully added a new message!")
     })
