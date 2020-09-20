@@ -32,7 +32,8 @@ class Chat extends Component {
     }
     this.props.getUser(this.state.user);
     // look here
-    console.log(this.props.user)
+    this.setState({name: this.props.user.firstName + " " + this.props.user.lastName})
+    //console.log(this.state.name)
   }
 
   findMessages = async () => {
@@ -44,17 +45,32 @@ class Chat extends Component {
       if(x == undefined) {
         x = [];
       }
-      let y = [];
+      //let y = [];
       for(var i = 0; i < x.length;i++) {
         x[i].createdAt = new Date(x[i].createdAt.toDate().toDateString());
         //console.log(x[i]);
       }
-      this.setState({messages: x});
-    }
+      
+      await this.setState({messages: x});
 
-    // .onSnapshot(function(doc) {
-    //   console.log(doc.data());
-    // });
+      docRef.onSnapshot(function(snapshot) {
+        let z = snapshot.data().messages;
+        if(x.length != z.length) {
+          if(z == undefined) {
+            z = [];
+          }
+          //let y = [];
+          for(var i = 0; i < z.length;i++) {
+            z[i].createdAt = new Date(z[i].createdAt.toDate().toDateString());
+          }
+          this.setState({messages: z});
+        }
+      });
+    }
+  }
+
+  listeners = () => {
+    
   }
 
   findCoordinates = async () => {
@@ -73,9 +89,12 @@ class Chat extends Component {
   oSend(messages) {
     let x = this.state.messages;
     //console.log(this.state.messages);
+    if(this.state.messages == undefined) {
+      x = [];
+    }
     let y = x.push(messages[0]);
     this.setState({messages: x});
-
+    
 
     // set the remote firebase to update messages accordingly
     db.collection("messages").doc(this.state.location).set({
@@ -92,7 +111,12 @@ class Chat extends Component {
         <GiftedChat
           messages = { this.state.messages }
           onSend = {messages => this.oSend(messages)}
-          user={{_id: this.state.user}}
+          user={
+            {
+              _id: this.state.user,
+              name: this.state.name,
+            }
+          }
           renderUsernameOnMessage = {true}
           inverted = {false}
           alwaysShowSend = {true}
